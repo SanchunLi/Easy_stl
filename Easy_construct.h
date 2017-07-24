@@ -12,12 +12,12 @@ inline void construct(T1* p, T2& value)
 }
 
 template<class T>
-inline void destory(T* ptr)        //vision one for destory
+inline void destory(T* ptr)        //version one for destory
 {
 	ptr->~T();
 }
 
-template<class ForwardIterator>    //vision two for destory
+template<class ForwardIterator>    //version two for destory
 inline void destory(ForwardIterator first, ForwardIterator last)
 {
 	__destory(first, last, value_type(first)); //value_type() return pointer
@@ -40,7 +40,7 @@ void __destory_aux(ForwardIterator first, ForwardIterator last, __false_type)
 template<class ForwardIterator>
 inline void __destory_aux(ForwardIterator, ForwardIterator, __true_type)
 {
-#ifdef DEBUG                          //怎么识别？编译器自己处理？
+#ifdef DEBUG
 	std::cout << "trivial_destructor" << std::endl;
 #endif
 }
@@ -137,7 +137,7 @@ ForwardIterator __uninitialized_copy_aux(InputIterator first, InputIterator last
 
 /*
 
-// memmove()的定义在哪？
+// memmove()
 inline char* uninitialized_copy(const char* first, const char* last, char* result)
 {
 memmove(result, first, last-first);
